@@ -25,7 +25,9 @@ app.get("/", (req, res) => {
 
 require('./my-disney-api/routes/auth.routes')(app);
 require('./my-disney-api/routes/user.routes')(app);
-require('./my-disney-api/routes/property.routes')(app);
+require('./my-disney-api/routes/character.routes')(app);
+require('./my-disney-api/routes/movie.routes')(app);
+require('./my-disney-api/routes/genre.routes')(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
@@ -33,13 +35,13 @@ app.listen(PORT, () => {
 });
 
 function initial() {
-    /*Role.create({
+    Role.create({
         id: 1,
         name: "user"
     });
 
     Role.create({
-        id:2,
-        name:"admin"
-    });*/
+        id: 2,
+        name: "admin"
+    });
 }

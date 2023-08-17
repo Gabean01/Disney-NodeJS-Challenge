@@ -5,7 +5,14 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         releaseDate: DataTypes.DATE,
-        rating: DataTypes.INTEGER,
+        rating: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            validate: {
+                min: 1,
+                max: 5,
+            },
+        },
         image: DataTypes.STRING,
     });
 
