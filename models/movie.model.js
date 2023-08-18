@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         image: DataTypes.STRING,
     });
 
-    Movie.associate = (models) => {
+    /*Movie.associate = (models) => {
         Movie.belongsToMany(models.Character, {
             through: 'Movie',
             foreignKey: 'movieId',
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
             through: 'Genre',
             foreignKey: 'movieId',
         });
-    };
+    };*/
 
     return Movie;
 };

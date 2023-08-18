@@ -1,5 +1,5 @@
 const req = require("express/lib/request");
-const db = require("../models");
+const db = require("../../models");
 const res = require("express/lib/response");
 const Character = db.character;
 const Op = db.Sequelize.Op;
@@ -33,8 +33,11 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
     const character_name = req.query.character_name;
-    var condition = character_name ? { name: {
-            [Op.like]: `%${character_name}%` } } : null;
+    var condition = character_name ? {
+        name: {
+            [Op.like]: `%${character_name}%`
+        }
+    } : null;
 
     Character.findAll({ where: condition })
         .then(data => {

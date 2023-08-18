@@ -11,12 +11,12 @@ module.exports = (sequelize, DataTypes) => {
 
 
     });
-    Character.associate = (models) => {
+    /*Character.associate = (models) => {
         Character.belongsToMany(models.Movie, {
             through: 'Movie',
             foreignKey: 'characterId',
         });
-    };
+    };*/
 
 
     return Character;

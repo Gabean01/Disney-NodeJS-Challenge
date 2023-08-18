@@ -7,12 +7,12 @@ module.exports = (sequelize, DataTypes) => {
         image: DataTypes.STRING,
     });
 
-    Genre.associate = (models) => {
+    /*Genre.associate = (models) => {
         Genre.belongsToMany(models.Movie, {
             through: 'Movie',
             foreignKey: 'genreId',
         });
-    };
+    };*/
 
     return Genre;
 };
