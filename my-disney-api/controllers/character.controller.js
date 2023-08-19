@@ -39,9 +39,16 @@ exports.findAll = (req, res) => {
         }
     } : null;
 
-    Character.findAll({ where: condition })
+    Character.findAll({
+            where: condition,
+            attributes: ['name', 'image']
+        })
         .then(data => {
-            res.send(data);
+            res.send({
+                "success": true,
+                "code": 200,
+                "data": data
+            });
         })
         .catch(err => {
             res.status(500).send({

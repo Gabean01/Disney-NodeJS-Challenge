@@ -10,16 +10,16 @@ module.exports = function(app) {
         next();
     });
 
-    app.get("/characters/", [authJwt.verifyToken], character.findAll);
+    app.get("/api/v1/characters", [authJwt.verifyToken], character.findAll);
 
-    app.post("/character/", [authJwt.verifyToken], character.create);
+    app.post("/api/v1/character", [authJwt.verifyToken], character.create);
 
-    app.get("/character/:id", [authJwt.verifyToken], character.findOne);
+    app.get("/api/v1/character/:id", [authJwt.verifyToken], character.findOne);
 
-    app.put("/character/:id", [authJwt.verifyToken], character.update);
+    app.put("/api/v1/character/:id", [authJwt.verifyToken], character.update);
 
-    app.delete("/character/:id", [authJwt.verifyToken], character.delete);
+    app.delete("/api/v1/character/:id", [authJwt.verifyToken], character.delete);
 
-    app.delete("/characters/", [authJwt.verifyToken], character.deleteAll);
+    app.delete("/api/v1/characters", [authJwt.verifyToken], character.deleteAll);
 
 };

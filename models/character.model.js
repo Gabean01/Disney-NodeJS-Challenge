@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Character = sequelize.define('Character', {
+    const Character = sequelize.define('Characters', {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -8,16 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         weight: DataTypes.FLOAT,
         history: DataTypes.TEXT,
         image: DataTypes.STRING,
-
-
     });
-    /*Character.associate = (models) => {
-        Character.belongsToMany(models.Movie, {
-            through: 'Movie',
-            foreignKey: 'characterId',
-        });
-    };*/
-
 
     return Character;
 };

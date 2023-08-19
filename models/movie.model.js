@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Movie = sequelize.define('Movie', {
+    const Movie = sequelize.define('Movies', {
         title: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -14,19 +14,17 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
         image: DataTypes.STRING,
+        characterId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'Characters',
+                key: 'id'
+            }
+        }
     });
-
-    /*Movie.associate = (models) => {
-        Movie.belongsToMany(models.Character, {
-            through: 'Movie',
-            foreignKey: 'movieId',
-        });
-
-        Movie.belongsToMany(models.Genre, {
-            through: 'Genre',
-            foreignKey: 'movieId',
-        });
-    };*/
+    Movie.associate = models => {
+        Character.belongsTo(models.Character, { foreignKey: 'characterId' });
+    };
 
     return Movie;
 };

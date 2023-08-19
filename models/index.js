@@ -53,6 +53,7 @@ db.Sequelize = Sequelize;
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.character = require("../models/character.model.js")(sequelize, Sequelize);
+db.movie = require("../models/movie.model.js")(sequelize, Sequelize);
 
 db.ROLES = ["user", "admin"];
 
