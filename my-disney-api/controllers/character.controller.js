@@ -48,14 +48,14 @@ exports.findAll = (req, res) => {
         };
     }
 
-    if (req.query.movies) {
+    /*if (req.query.movies) {
         findCharacterIdByMovieId(req.query.movies)
             .then(characterId => {
                 condition.id = {
                     [Op.like]: `%${characterId}%`
                 };
             });
-    }
+    }*/
 
 
     Character.findAll({
@@ -176,7 +176,7 @@ exports.findAllPublished = (req, res) => {
         });
 };
 
-function findCharacterIdByMovieId(movieId) {
+/*function findCharacterIdByMovieId(movieId) {
     return new Promise((resolve, reject) => {
         Movie.findAll({
                 where: { id: movieId }
@@ -185,8 +185,7 @@ function findCharacterIdByMovieId(movieId) {
                 if (data.length === 0) {
                     reject([]);
                 } else {
-                    const characterId = data.map(movie => movie.characterId);
-                    resolve(characterId);
+                    resolve(data);
                 }
             })
             .catch(err => {
@@ -194,3 +193,5 @@ function findCharacterIdByMovieId(movieId) {
             });
     });
 };
+
+module.exports = { findCharacterIdByMovieId }*/

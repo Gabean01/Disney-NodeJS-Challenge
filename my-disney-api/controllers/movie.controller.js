@@ -30,16 +30,27 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    const movieTitle = req.query.movieTitle;
-    var condition = movieTitle ? {
-        title: {
-            [Op.like]: `%${movieTitle}%`
-        }
-    } : null;
+    let condition = {};
+    if (req.query.name) {
+        condition.title = {
+            [Op.like]: `%${req.query.name}%`
+        };
+    }
+
+    if (req.query.genre) {
+        condition.genre = {
+            [Op.like]: `%${req.query.genre}%`
+        };
+    }
+
+    const order = req.query.order && (req.query.order.toUpperCase() === 'ASC' || req.query.order.toUpperCase() === 'DESC') ? req.query.order.toUpperCase() : 'ASC';
 
     Movie.findAll({
             where: condition,
-            attributes: ['title', 'releaseDate', 'image']
+            attributes: ['title', 'releaseDate', 'image'],
+            order: [
+                ['title', order]
+            ]
         })
         .then(data => {
             res.send({
