@@ -39,7 +39,7 @@ exports.findAll = (req, res) => {
 
     Movie.findAll({
             where: condition,
-            attributes: ['title', 'releaseDate', 'rating', 'image']
+            attributes: ['title', 'releaseDate', 'image']
         })
         .then(data => {
             res.send({

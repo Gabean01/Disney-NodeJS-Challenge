@@ -3,6 +3,7 @@ const db = require("../../models");
 const res = require("express/lib/response");
 const { findMoviesByCharacterId } = require("./movie.controller");
 const Character = db.character;
+const Movie = db.movie;
 const movie = require("../controllers/movie.controller");
 const Op = db.Sequelize.Op;
 
@@ -34,12 +35,28 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    const character_name = req.query.character_name;
-    var condition = character_name ? {
-        name: {
-            [Op.like]: `%${character_name}%`
-        }
-    } : null;
+    let condition = {};
+    if (req.query.name) {
+        condition.name = {
+            [Op.like]: `%${req.query.name}%`
+        };
+    }
+
+    if (req.query.age) {
+        condition.age = {
+            [Op.like]: `%${req.query.age}%`
+        };
+    }
+
+    if (req.query.movies) {
+        findCharacterIdByMovieId(req.query.movies)
+            .then(characterId => {
+                condition.id = {
+                    [Op.like]: `%${characterId}%`
+                };
+            });
+    }
+
 
     Character.findAll({
             where: condition,
@@ -157,4 +174,23 @@ exports.findAllPublished = (req, res) => {
                 message: err.message || "Some error occurred while retrieving characters."
             });
         });
+};
+
+function findCharacterIdByMovieId(movieId) {
+    return new Promise((resolve, reject) => {
+        Movie.findAll({
+                where: { id: movieId }
+            })
+            .then(data => {
+                if (data.length === 0) {
+                    reject([]);
+                } else {
+                    const characterId = data.map(movie => movie.characterId);
+                    resolve(characterId);
+                }
+            })
+            .catch(err => {
+                reject(new Error("Error retrieving movies for character with id=" + movieId + ". Error: " + err.message));
+            });
+    });
 };
