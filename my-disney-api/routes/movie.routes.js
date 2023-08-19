@@ -11,15 +11,15 @@ module.exports = function(app) {
     });
 
 
-    app.get("/api/v1/movies", [authJwt.verifyToken], movieController.findAll);
+    app.get("/api/v1/movies", [authJwt.verifyToken], movie.findAll);
 
-    app.post("/api/v1/movies", [authJwt.verifyToken], movieController.create);
+    app.post("/api/v1/movie", [authJwt.verifyToken], movie.create);
 
-    app.get("/api/v1/movies/:id", [authJwt.verifyToken], movieController.findOne);
+    app.get("/api/v1/movie/:id", [authJwt.verifyToken], movie.findOne);
 
-    app.put("/api/v1/movies/:id", [authJwt.verifyToken], movieController.update);
+    app.put("/api/v1/movie/:id", [authJwt.verifyToken], movie.update);
 
-    app.delete("/api/v1/movies/:id", [authJwt.verifyToken], movieController.delete);
+    app.delete("/api/v1/movie/:id", [authJwt.verifyToken], movie.delete);
 
-    app.delete("/api/v1/movies", [authJwt.verifyToken], movieController.deleteAll);
+    app.delete("/api/v1/movies", [authJwt.verifyToken], movie.deleteAll);
 };

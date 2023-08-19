@@ -1,7 +1,9 @@
 const req = require("express/lib/request");
 const db = require("../../models");
 const res = require("express/lib/response");
+const { findMoviesByCharacterId } = require("./movie.controller");
 const Character = db.character;
+const movie = require("../controllers/movie.controller");
 const Op = db.Sequelize.Op;
 
 //Create and Save a new Character
@@ -62,7 +64,18 @@ exports.findOne = (req, res) => {
 
     Character.findByPk(id)
         .then(data => {
-            res.send(data);
+            // Now find the movies for this character
+            findMoviesByCharacterId(id).then(movies => {
+                // Include movies in the response
+                res.send({
+                    character: data,
+                    movies: movies
+                });
+            }).catch(movieErr => {
+                res.status(500).send({
+                    message: "Error retrieving movies for character with id=" + id
+                });
+            });
         })
         .catch(err => {
             res.status(500).send({

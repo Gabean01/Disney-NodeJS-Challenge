@@ -1,3 +1,6 @@
+const db = require("../models");
+const Character = db.character;
+
 module.exports = (sequelize, DataTypes) => {
     const Movie = sequelize.define('Movies', {
         title: {
@@ -22,9 +25,9 @@ module.exports = (sequelize, DataTypes) => {
             }
         }
     });
-    Movie.associate = models => {
+    /*Movie.associate = models => {
         Character.belongsTo(models.Character, { foreignKey: 'characterId' });
-    };
+    };*/
 
     return Movie;
 };

@@ -1,22 +1,21 @@
 const res = require("express/lib/response");
 const db = require("../../models");
-const Movie = db.movi;
+const Movie = db.movie;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
-    if (!req.body.title) {
+    if (!req.body.title || !req.body.characterId) {
         res.status(400).send({
-            message: "Title can not be empty!"
+            message: "Title or characterId can not be empty!"
         });
         return;
     }
-
-
     const movie = {
         title: req.body.title,
         releaseDate: req.body.releaseDate,
         rating: req.body.rating,
-        image: req.body.image
+        image: req.body.image,
+        characterId: req.body.characterId
     };
 
     Movie.create(movie)
@@ -131,4 +130,22 @@ exports.deleteAll = (req, res) => {
                 message: err.message || "Some error occurred while removing all movies."
             });
         });
+};
+
+exports.findMoviesByCharacterId = (characterId) => {
+    return new Promise((resolve, reject) => {
+        Movie.findAll({
+                where: { characterId: characterId }
+            })
+            .then(data => {
+                if (data.length === 0) {
+                    reject([]);
+                } else {
+                    resolve(data);
+                }
+            })
+            .catch(err => {
+                reject(new Error("Error retrieving movies for character with id=" + characterId + ". Error: " + err.message));
+            });
+    });
 };

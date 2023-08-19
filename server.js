@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
 require('./my-disney-api/routes/auth.routes')(app);
 require('./my-disney-api/routes/user.routes')(app);
 require('./my-disney-api/routes/character.routes')(app);
+require('./my-disney-api/routes/movie.routes')(app);
 
 
 const PORT = process.env.PORT || 8080;
