@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
         weight: DataTypes.FLOAT,
         history: DataTypes.TEXT,
         image: DataTypes.STRING,
+    }, {
+        timestamps: true,
+        paranoid: true
     });
 
     return Character;

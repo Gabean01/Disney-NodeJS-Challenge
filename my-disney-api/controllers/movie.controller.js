@@ -50,7 +50,8 @@ exports.findAll = (req, res) => {
             attributes: ['title', 'releaseDate', 'image'],
             order: [
                 ['title', order]
-            ]
+            ],
+            paranoid: false
         })
         .then(data => {
             res.send({
@@ -146,7 +147,8 @@ exports.deleteAll = (req, res) => {
 exports.findMoviesByCharacterId = (characterId) => {
     return new Promise((resolve, reject) => {
         Movie.findAll({
-                where: { characterId: characterId }
+                where: { characterId: characterId },
+                paranoid: false
             })
             .then(data => {
                 if (data.length === 0) {

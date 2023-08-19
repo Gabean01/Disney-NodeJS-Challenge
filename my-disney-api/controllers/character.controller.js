@@ -60,7 +60,8 @@ exports.findAll = (req, res) => {
 
     Character.findAll({
             where: condition,
-            attributes: ['name', 'image']
+            attributes: ['name', 'image'],
+            paranoid: false
         })
         .then(data => {
             res.send({
@@ -160,18 +161,6 @@ exports.deleteAll = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while removing all characters."
-            });
-        });
-};
-
-exports.findAllPublished = (req, res) => {
-    Character.findAll({ where: { published: true } })
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving characters."
             });
         });
 };

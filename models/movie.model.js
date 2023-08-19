@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
                 key: 'id'
             }
         }
+    }, {
+        timestamps: true,
+        paranoid: true
     });
     /*Movie.associate = models => {
         Character.belongsTo(models.Character, { foreignKey: 'characterId' });
