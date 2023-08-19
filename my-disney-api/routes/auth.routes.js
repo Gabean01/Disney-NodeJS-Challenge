@@ -10,6 +10,18 @@ module.exports = function(app) {
         next();
     });
 
+    /**
+     * @swagger
+     * /api/v1/auth/register:
+     *   post:
+     *     tags:
+     *       - Auth
+     *     description: Create user
+     *     responses:
+     *       200:
+     *         description: Success
+     * 
+     */
     app.post(
         "/api/v1/auth/register", [
             verifySignUp.checkDuplicateUsernameOrEmail,
@@ -18,5 +30,17 @@ module.exports = function(app) {
         controller.register
     );
 
+    /**
+     * @swagger
+     * /api/v1/auth/login:
+     *   post:
+     *     tags:
+     *       - Auth
+     *     description: Login user
+     *     responses:
+     *       200:
+     *         description: Success
+     * 
+     */
     app.post("/api/v1/auth/login", controller.login);
 };

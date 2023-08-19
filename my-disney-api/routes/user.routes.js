@@ -10,6 +10,18 @@ module.exports = function(app) {
         next();
     });
 
+    /**
+     * @swagger
+     * /api/users:
+     *   get:
+     *     tags:
+     *       - Users
+     *     description: Returns all users
+     *     responses:
+     *       200:
+     *         description: Success
+     * 
+     */
     app.get("/api/test/all", controller.allAccess);
 
     app.get(

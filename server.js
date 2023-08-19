@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocs = require('./config/swagger');
 
 const app = express();
 
@@ -13,6 +15,9 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 
 const db = require("./models");
 const Role = db.role;
